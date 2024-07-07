@@ -6,24 +6,31 @@ using UnityEngine.AI;
 public class IdleState : WolfStates
 {
     public ChaseState chaseState;
-    public Transform player;       // Reference to the player's transform
-    public float viewRadius = 10f; // Radius within which the wolf can see the player
-    public float viewAngle = 120f; // Angle within which the wolf can see the player
-    public LayerMask playerMask;   // Layer mask to identify the player
-    public LayerMask obstacleMask; // Layer mask to identify obstacles
-    public NavMeshAgent navMeshAgent; // Reference to the NavMeshAgent
+    public GameObject wolf;         // Reference to the Wolf GameObject
+    public Transform player;
+    public float viewRadius = 10f;
+    public float viewAngle = 120f;
+    public LayerMask playerMask;
+    public LayerMask obstacleMask;
+    public float patrolWaitTime = 3f;
+
+    private NavMeshAgent navMeshAgent;
+    private bool patrolPointSet;
+    private Vector3 patrolPoint;
+    private float patrolTimer;
 
     private void Start()
     {
-        // Find the player by tag (assuming the player GameObject is tagged as "Player")
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
-        // Get the NavMeshAgent component from the wolf GameObject
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent = wolf.GetComponent<NavMeshAgent>();
+        patrolTimer = 0f;
+        patrolPointSet = false;
     }
 
     public override WolfStates RunCurrentState()
     {
+        Patrol();
+
         if (CanSeePlayer())
         {
             return chaseState;
@@ -32,6 +39,42 @@ public class IdleState : WolfStates
         {
             return this;
         }
+    }
+
+    private void Patrol()
+    {
+        if (patrolPointSet)
+        {
+            navMeshAgent.SetDestination(patrolPoint);
+
+            // Check if the wolf has reached the patrol point
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            {
+                patrolPointSet = false;
+                patrolTimer = 0f;
+            }
+        }
+        else
+        {
+            patrolTimer += Time.deltaTime;
+
+            if (patrolTimer >= patrolWaitTime)
+            {
+                patrolPointSet = true;
+                // Choose a random point within a range and set it as the patrol point
+                Vector3 randomPoint = transform.position + Random.insideUnitSphere * 10f;
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
+                {
+                    patrolPoint = hit.position;
+                }
+            }
+        }
+    }
+
+    public void SetNavMeshAgent(NavMeshAgent agent)
+    {
+        navMeshAgent = agent;
     }
 
     private bool CanSeePlayer()

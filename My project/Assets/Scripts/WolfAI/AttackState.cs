@@ -13,7 +13,7 @@ public class AttackState : WolfStates
     private Animator animator;       // Reference to the Animator component on jaws
     private bool isAttacking = false;
     private Coroutine attackCoroutine; // Reference to the current attack coroutine
-
+    public float BiteAnimationDuration= 0.55f;
 
     private void Start()
     {
@@ -75,12 +75,12 @@ public class AttackState : WolfStates
             }
 
             // Wait for 1 second before enabling the jaws collider
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(BiteAnimationDuration);
             EnableJawsCollider();
             Debug.Log("Jaws Collider Enabled");
 
             // Wait for another second before disabling the jaws collider
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f);
             DisableJawsCollider();
             Debug.Log("Jaws Collider Disabled");
 
@@ -88,7 +88,7 @@ public class AttackState : WolfStates
        
 
             // Wait for the rest of the bite animation duration
-            yield return new WaitForSeconds(1f); // Assuming the bite animation is 3 seconds long
+            yield return new WaitForSeconds(1f); 
         }
     }
 

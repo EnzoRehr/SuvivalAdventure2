@@ -469,6 +469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseState: {fileID: 1178327336991574823}
+  wolf: {fileID: 7710107880078231322}
   player: {fileID: 0}
   viewRadius: 10
   viewAngle: 120
@@ -478,7 +479,7 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4096
-  navMeshAgent: {fileID: 0}
+  patrolWaitTime: 5
 --- !u!1 &6801462057133942692
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,6 +530,7 @@ MonoBehaviour:
   wolf: {fileID: 7710107880078231322}
   wolfModel: {fileID: 5074173813303653256}
   jaws: {fileID: 2032694115555930042}
+  BiteAnimationDuration: 0.55
 --- !u!1 &7710107880078231322
 GameObject:
   m_ObjectHideFlags: 0
