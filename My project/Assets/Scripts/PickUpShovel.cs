@@ -13,8 +13,7 @@ public class PickUpShovel : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Log when the trigger is entered
-        Debug.Log("Trigger stay detected");
+       
 
         if (other.gameObject.tag == "Player")
         {

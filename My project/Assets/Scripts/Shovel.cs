@@ -32,6 +32,7 @@ public class Shovel : MonoBehaviour
 
     IEnumerator ResetAttackCooldown()
     {
+        StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
     }
@@ -40,6 +41,7 @@ public class Shovel : MonoBehaviour
     IEnumerator ResetAttackBool()
     {
         yield return new WaitForSeconds(1.0f);
+        IsAttacking = false;
     }
 
 }
