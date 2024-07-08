@@ -77,12 +77,12 @@ public class AttackState : WolfStates
             // Wait for 1 second before enabling the jaws collider
             yield return new WaitForSeconds(BiteAnimationDuration);
             EnableJawsCollider();
-            Debug.Log("Jaws Collider Enabled");
+          
 
             // Wait for another second before disabling the jaws collider
             yield return new WaitForSeconds(0.3f);
             DisableJawsCollider();
-            Debug.Log("Jaws Collider Disabled");
+           
 
             // Reset the damage flag after the collider is disabled
        

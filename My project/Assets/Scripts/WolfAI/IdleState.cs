@@ -18,6 +18,8 @@ public class IdleState : WolfStates
     private bool patrolPointSet;
     private Vector3 patrolPoint;
     private float patrolTimer;
+    private Vector3 minBound;
+    private Vector3 maxBound;
 
     private void Start()
     {
@@ -60,21 +62,30 @@ public class IdleState : WolfStates
 
             if (patrolTimer >= patrolWaitTime)
             {
+                patrolPoint = GetRandomPatrolPoint();
                 patrolPointSet = true;
-                // Choose a random point within a range and set it as the patrol point
-                Vector3 randomPoint = transform.position + Random.insideUnitSphere * 10f;
-                NavMeshHit hit;
-                if (NavMesh.SamplePosition(randomPoint, out hit, 10f, NavMesh.AllAreas))
-                {
-                    patrolPoint = hit.position;
-                }
             }
         }
+    }
+
+    private Vector3 GetRandomPatrolPoint()
+    {
+        float x = Random.Range(minBound.x, maxBound.x);
+        float z = Random.Range(minBound.z, maxBound.z);
+        float y = wolf.transform.position.y; // Assuming the terrain is flat
+
+        return new Vector3(x, y, z);
     }
 
     public void SetNavMeshAgent(NavMeshAgent agent)
     {
         navMeshAgent = agent;
+    }
+
+    public void SetBounds(Vector3 min, Vector3 max)
+    {
+        minBound = min;
+        maxBound = max;
     }
 
     private bool CanSeePlayer()
