@@ -5,9 +5,18 @@ using UnityEngine.SceneManagement; // Add this for scene management
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject TK;
+    private TicketCollectorHandOver HO;
+
+    private void Start()
+    {
+        HO = TK.GetComponent<TicketCollectorHandOver>(); // Assign the TicketCollectorHandOver component from the TK GameObject
+    }
+
     private void Update()
     {
         CheckForPlayers();
+        CheckForTk();
     }
 
     private void CheckForPlayers()
@@ -38,5 +47,19 @@ public class GameManager : MonoBehaviour
         // Reload the currently active scene
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+    }
+
+    private void CheckForTk()
+    {
+        if (!TK.activeSelf)
+        {
+            Debug.Log("My Rules Ending");
+            RestartGame();
+        }
+        else if (HO != null && HO.CollectorSatisfied)
+        {
+            Debug.Log("Good Ending");
+            RestartGame();
+        }
     }
 }

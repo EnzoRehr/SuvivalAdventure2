@@ -10,7 +10,7 @@ public class CollisionDetection : MonoBehaviour
 
         private void OnTriggerEnter(Collider other)
         {
-        if( other.tag== "Enemy" && wc.IsAttacking && wc.CanDealDamage )
+        if(other.CompareTag("Enemy") && wc.IsAttacking && wc.CanDealDamage )
         {
             Debug.Log("Enemy Hit");
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
