@@ -5,10 +5,9 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Settings")]
-    public float maxHealth;
-
+    public float maxHealth; 
     public HealthBar healthBar;
-    private float currentHealth;
+    public float currentHealth;
 
     private void Start()
     {
@@ -31,10 +30,15 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetSlider(currentHealth);
     }
 
+    private void FixedUpdate()
+    {
+        healthBar.SetSlider(currentHealth);
+    }
+
 
     private void Update()
     {
-        if(currentHealth <=0)
+        if (currentHealth <=0)
         {
             Die();
         }

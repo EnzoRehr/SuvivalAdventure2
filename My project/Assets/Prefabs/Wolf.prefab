@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431ba644d679fd741bf6424971f06ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 20
+  Damage: 10
 --- !u!1 &5074173813303653256
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +488,7 @@ MonoBehaviour:
   player: {fileID: 0}
   viewRadius: 10
   viewAngle: 120
+  proximityRadius: 4
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -663,7 +664,7 @@ MonoBehaviour:
   attackState: {fileID: 6757815836642926760}
   player: {fileID: 0}
   attackRange: 1.8
-  moveSpeed: 5
+  moveSpeed: 7
   playerMask:
     serializedVersion: 2
     m_Bits: 1024
