@@ -12,10 +12,12 @@ public class Timer : MonoBehaviour
     public float dropInterval = 60f; // Interval in seconds (1 minute)
     public PlayerMovement Speed;
     public PlayerHealth HP;
+    public PlayerInventory inventory;
 
     private float currentTemperature;
     private float elapsedTime = 0f;
-    private int count;
+    private int miunte;
+    private int debufmin;
 
     void Start()
     {
@@ -31,7 +33,7 @@ public class Timer : MonoBehaviour
         {
             elapsedTime = 0f;
             DecreaseTemperature();
-            count++;
+            miunte++;
             Debuff();
         }
     }
@@ -52,15 +54,24 @@ public class Timer : MonoBehaviour
         display.text = currentTemperature+" C";
     }
     void Debuff()
-    {
-        if(count >= 7)
+    {  
+
+        if(miunte >= 7 && inventory.usedAdrenaline== false)
         {
            HP.currentHealth -= 5f;
 
         }
-        if (count >= 10)
+        if (miunte >= 10 && inventory.usedAdrenaline == false)
         {
            Speed.moveSpeed -= 0.2f;
         }
+
+        if(debufmin<= 2 && inventory.usedAdrenaline == true)
+        {
+            Speed.moveSpeed = 5f;
+            debufmin++;
+        }
+        else
+            inventory.usedAdrenaline = false;
     }
 }

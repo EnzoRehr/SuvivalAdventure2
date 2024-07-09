@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public int bandages = 0;
     public int adrenalineInjections = 0;
     public int tickets = 0;
+    public bool usedAdrenaline=false;
 
     public Text bandagesText;
     public Text adrenalineInjectionsText;
@@ -76,6 +77,7 @@ public class PlayerInventory : MonoBehaviour
         if(adrenalineInjections>0)
         {
             adrenalineInjections--;
+            usedAdrenaline = true;
         }
         UpdateUI();
     }
