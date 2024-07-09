@@ -5,15 +5,20 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
     public Shovel wc;
-       
+    public  float Damage =50f;   
 
 
         private void OnTriggerEnter(Collider other)
         {
-        if( other.tag== "Enemy" && wc.IsAttacking )
+        if( other.tag== "Enemy" && wc.IsAttacking && wc.CanDealDamage )
         {
             Debug.Log("Enemy Hit");
-            
+            EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                enemyHealth.TakeDamage(Damage);
+            }
+            wc.CanDealDamage = false;
         }
         }
 

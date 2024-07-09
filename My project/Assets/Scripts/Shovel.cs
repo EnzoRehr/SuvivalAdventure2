@@ -9,6 +9,8 @@ public class Shovel : MonoBehaviour
     public float AttackCooldown = 1.5f;
     public bool IsAttacking = false;
 
+    public bool CanDealDamage=false;
+
     void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -16,16 +18,19 @@ public class Shovel : MonoBehaviour
             if(CanAttack)
             {
                 ShovelAttack();
+               
             }
         }
     }
 
     public void ShovelAttack()
     {
+       
         IsAttacking = true;
         CanAttack = false;
         Animator anim = shovel.GetComponent<Animator>();
         anim.SetTrigger("Attack");
+        StartCoroutine(ResetDamageBool());
         StartCoroutine(ResetAttackCooldown());
     }
 
@@ -35,12 +40,18 @@ public class Shovel : MonoBehaviour
         StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
+       
     }
 
+    IEnumerator ResetDamageBool()
+    {
+        yield return new WaitForSeconds(0.55f);
+        CanDealDamage = true;
+    }
 
     IEnumerator ResetAttackBool()
     {
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(AttackCooldown);
         IsAttacking = false;
     }
 

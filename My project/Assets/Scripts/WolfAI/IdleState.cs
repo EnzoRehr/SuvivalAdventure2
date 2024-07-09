@@ -10,6 +10,7 @@ public class IdleState : WolfStates
     public Transform player;
     public float viewRadius = 10f;
     public float viewAngle = 120f;
+    public float proximityRadius = 4f;  // Proximity distance for triggering chase state
     public LayerMask playerMask;
     public LayerMask obstacleMask;
     public float patrolWaitTime = 3f;
@@ -33,7 +34,7 @@ public class IdleState : WolfStates
     {
         Patrol();
 
-        if (CanSeePlayer())
+        if (CanSeePlayer() || IsPlayerTooClose())
         {
             return chaseState;
         }
@@ -110,6 +111,12 @@ public class IdleState : WolfStates
         return false;
     }
 
+    private bool IsPlayerTooClose()
+    {
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        return distanceToPlayer < proximityRadius;
+    }
+
     // This method is optional and helps visualize the field of view in the Scene view
     private void OnDrawGizmos()
     {
@@ -122,5 +129,9 @@ public class IdleState : WolfStates
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + leftBoundary);
         Gizmos.DrawLine(transform.position, transform.position + rightBoundary);
+
+        // Visualize proximity radius
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, proximityRadius);
     }
 }

@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 431ba644d679fd741bf6424971f06ad8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 20
 --- !u!1 &5074173813303653256
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +221,7 @@ GameObject:
   - component: {fileID: 5105184082112840112}
   - component: {fileID: 8814758314480708368}
   - component: {fileID: 1139486605393135692}
+  - component: {fileID: 6450204201345023060}
   m_Layer: 0
   m_Name: Model
   m_TagString: Enemy
@@ -341,6 +343,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &6450204201345023060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074173813303653256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b27e618eb5790b145ba116561486d7f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
 --- !u!1 &6614262892439251729
 GameObject:
   m_ObjectHideFlags: 0
