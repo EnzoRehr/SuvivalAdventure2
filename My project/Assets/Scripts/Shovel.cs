@@ -40,7 +40,7 @@ public class Shovel : MonoBehaviour
         StartCoroutine(ResetAttackBool());
         yield return new WaitForSeconds(AttackCooldown);
         CanAttack = true;
-       
+        CanDealDamage = false;
     }
 
     IEnumerator ResetDamageBool()
