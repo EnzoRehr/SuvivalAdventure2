@@ -486,7 +486,7 @@ MonoBehaviour:
   chaseState: {fileID: 1178327336991574823}
   wolf: {fileID: 7710107880078231322}
   player: {fileID: 0}
-  viewRadius: 10
+  viewRadius: 85
   viewAngle: 120
   proximityRadius: 4
   playerMask:

@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,10 @@ public class PlayerInventory : MonoBehaviour
     public int tickets = 0;
     public bool usedAdrenaline=false;
 
-    public Text bandagesText;
-    public Text adrenalineInjectionsText;
+    public TextMeshProUGUI bandagesText;
+    public TextMeshProUGUI adrenalineInjectionsText;
     public GameObject ticketsText;
-
+    
     void Start()
     {
         ticketsText.SetActive(false);

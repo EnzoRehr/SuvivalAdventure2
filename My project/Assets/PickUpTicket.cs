@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PickUpTicket : MonoBehaviour
 {
     public PlayerInventory PI;
+    public TextMeshProUGUI display;
     private void OnTriggerStay(Collider other)
     {
 
@@ -13,6 +15,7 @@ public class PickUpTicket : MonoBehaviour
         {
             // Log when the player is detected
             Debug.Log("Player detected");
+            display.gameObject.SetActive(true);
 
             if (Input.GetKey(KeyCode.F))
             {
@@ -21,6 +24,7 @@ public class PickUpTicket : MonoBehaviour
 
                 // Deactivate the current shovel
                 this.gameObject.SetActive(false);
+                display.gameObject.SetActive(false);
                 // Activate the shovel on the player
                 PI.AddTicket(1);
 
@@ -28,5 +32,7 @@ public class PickUpTicket : MonoBehaviour
                 Debug.Log("Ticket picked up and attached to player");
             }
         }
+        else
+            display.gameObject.SetActive(false);
     }
 }
